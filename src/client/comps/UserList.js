@@ -4,7 +4,6 @@ import { fetchUsers } from "../actions";
 
 class UserList extends React.Component {
     componentDidMount() {
-        console.log('$$ mounted');
         this.props.fetchUser();
     }
 
@@ -15,7 +14,6 @@ class UserList extends React.Component {
     }
 
     render() {
-        console.log('$$$ this.props.users', this.props.users);
         return (
             <div>
                 User list component
@@ -28,7 +26,6 @@ class UserList extends React.Component {
 }
 
 function mapStateToProps(state) {
-    console.log('$$ state', state.users);
     return { users: state.users || [] };
 };
 

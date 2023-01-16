@@ -41567,12 +41567,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-exports.default = function () {
-    return (0, _redux.combineReducers)({
-        users: _users2.default
-    });
-};
-
 var _redux = __webpack_require__(110);
 
 var _users = __webpack_require__(468);
@@ -41581,7 +41575,9 @@ var _users2 = _interopRequireDefault(_users);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-;
+exports.default = (0, _redux.combineReducers)({
+    users: _users2.default
+});
 
 /***/ }),
 /* 468 */
@@ -41605,7 +41601,7 @@ exports.default = function () {
         case _actions.FETCH_USERS_SUCCESS:
             console.log('$$ FETCH_USERS_SUCCESS reducer');
             return action.payload.data;
-        case FETCH_USERS_FAILURE:
+        case _actions.FETCH_USERS_FAILURE:
             console.log('$$ FETCH_USERS_FAILURE reducer');
             return action.payload;
         default:

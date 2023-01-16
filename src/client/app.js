@@ -14,7 +14,7 @@ console.log('Client side APP loaded!');
 
 const sagaMiddleware = createSagaMiddleware();
 const clientStore = createStore(reducers, {}, applyMiddleware(sagaMiddleware));
-console.log('$$$ clientStore', clientStore.getState());
+window.store = clientStore;
 sagaMiddleware.run(userSaga);
 
 ReactDOm.hydrate(

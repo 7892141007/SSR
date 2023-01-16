@@ -8,9 +8,7 @@ const getUsersAPI = () => {
 
 function* fetchUsers() {
     const res = yield call(getUsersAPI);
-    console.log('$$$ res', res);
     if (res.status === 200) {
-        console.log('$$$ 200');
         yield put(fetchUsersSuccess(res));
     } else {
         yield put(fetchUsersFailure(res));
