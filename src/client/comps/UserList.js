@@ -4,7 +4,7 @@ import { fetchUsers } from "../actions";
 
 class UserList extends React.Component {
     componentDidMount() {
-        this.props.fetchUser();
+        this.props.fetchUsers();
     }
 
     renderUsers() {
@@ -29,10 +29,4 @@ function mapStateToProps(state) {
     return { users: state.users || [] };
 };
 
-function mapDispatchToProps(dispatch) {
-    return {
-        fetchUser: () => dispatch(fetchUsers())
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserList);
+export default connect(mapStateToProps, { fetchUsers })(UserList);

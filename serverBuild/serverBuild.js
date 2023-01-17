@@ -71,54 +71,71 @@ module.exports = require("react");
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+module.exports = require("react-router-dom");
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-// import Axios from "axios";
+exports.fetchUsers = exports.FETCH_USERS = undefined;
+
+var _axios = __webpack_require__(13);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 var FETCH_USERS = exports.FETCH_USERS = 'fetch_users';
-var FETCH_USERS_SUCCESS = exports.FETCH_USERS_SUCCESS = 'fetch_users_success';
-var FETCH_USERS_FAILURE = exports.FETCH_USERS_FAILURE = 'fetch_users_failure';
-
-// export const fetchUsers = async dispatch =>  {
-//     const res = await Axios.get('http://react-ssr-api.herokuapp.com/users');
-//     console.log('$$ res', res);
-//     console.log('$$$ dispatching dispatch', dispatch);
-
-//     dispatch({
-//         type: FETCH_USERS,
-//         payload: res
-//     });
-// };
 
 var fetchUsers = exports.fetchUsers = function fetchUsers() {
-  return { type: FETCH_USERS };
+    return function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(dispatch) {
+            var res;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                    switch (_context.prev = _context.next) {
+                        case 0:
+                            _context.next = 2;
+                            return _axios2.default.get('http://react-ssr-api.herokuapp.com/users');
+
+                        case 2:
+                            res = _context.sent;
+
+
+                            dispatch({
+                                type: FETCH_USERS,
+                                payload: res
+                            });
+
+                        case 4:
+                        case 'end':
+                            return _context.stop();
+                    }
+                }
+            }, _callee, undefined);
+        }));
+
+        return function (_x) {
+            return _ref.apply(this, arguments);
+        };
+    }();
 };
-
-var fetchUsersSuccess = exports.fetchUsersSuccess = function fetchUsersSuccess(data) {
-  return { type: FETCH_USERS_SUCCESS, payload: data };
-};
-
-var fetchUsersFailure = exports.fetchUsersFailure = function fetchUsersFailure(data) {
-  return { type: FETCH_USERS_FAILURE, payload: data };
-};
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-redux");
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("react-router-dom");
 
 /***/ }),
 /* 4 */
@@ -143,7 +160,7 @@ var _renderer = __webpack_require__(8);
 
 var _renderer2 = _interopRequireDefault(_renderer);
 
-var _store = __webpack_require__(13);
+var _store = __webpack_require__(14);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -193,9 +210,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _server = __webpack_require__(9);
 
-var _reactRedux = __webpack_require__(2);
+var _reactRedux = __webpack_require__(1);
 
-var _reactRouterDom = __webpack_require__(3);
+var _reactRouterDom = __webpack_require__(2);
 
 var _Routes = __webpack_require__(10);
 
@@ -242,7 +259,7 @@ var _Home = __webpack_require__(11);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _reactRouterDom = __webpack_require__(3);
+var _reactRouterDom = __webpack_require__(2);
 
 var _UserList = __webpack_require__(12);
 
@@ -314,9 +331,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactRedux = __webpack_require__(2);
+var _reactRedux = __webpack_require__(1);
 
-var _actions = __webpack_require__(1);
+var _actions = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -338,8 +355,7 @@ var UserList = function (_React$Component) {
     _createClass(UserList, [{
         key: "componentDidMount",
         value: function componentDidMount() {
-            console.log('$$ mounted');
-            this.props.fetchUser();
+            this.props.fetchUsers();
         }
     }, {
         key: "renderUsers",
@@ -355,7 +371,6 @@ var UserList = function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
-            console.log('$$$ this.props.users', this.props.users);
             return _react2.default.createElement(
                 "div",
                 null,
@@ -373,22 +388,19 @@ var UserList = function (_React$Component) {
 }(_react2.default.Component);
 
 function mapStateToProps(state) {
-    console.log('$$ state', state.users);
     return { users: state.users || [] };
 };
 
-function mapDispatchToProps(dispatch) {
-    return {
-        fetchUser: function fetchUser() {
-            return dispatch((0, _actions.fetchUsers)());
-        }
-    };
-}
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UserList);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, { fetchUsers: _actions.fetchUsers })(UserList);
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports) {
+
+module.exports = require("axios");
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -400,56 +412,27 @@ Object.defineProperty(exports, "__esModule", {
 
 var _redux = __webpack_require__(4);
 
-var _reduxSaga = __webpack_require__(14);
+var _reduxThunk = __webpack_require__(15);
 
-var _reduxSaga2 = _interopRequireDefault(_reduxSaga);
+var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-var _index = __webpack_require__(15);
+var _index = __webpack_require__(16);
 
 var _index2 = _interopRequireDefault(_index);
-
-var _sagas = __webpack_require__(17);
-
-var _sagas2 = _interopRequireDefault(_sagas);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = function () {
-    var sagaMiddleware = (0, _reduxSaga2.default)();
-    var store = (0, _redux.createStore)(_index2.default, {}, (0, _redux.applyMiddleware)(sagaMiddleware));
-    sagaMiddleware.run(_sagas2.default);
+    var store = (0, _redux.createStore)(_index2.default, {}, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 
     return store;
 };
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports) {
 
-module.exports = require("redux-saga");
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _redux = __webpack_require__(4);
-
-var _users = __webpack_require__(16);
-
-var _users2 = _interopRequireDefault(_users);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = (0, _redux.combineReducers)({
-    users: _users2.default
-});
+module.exports = require("redux-thunk");
 
 /***/ }),
 /* 16 */
@@ -462,24 +445,17 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _actions = __webpack_require__(1);
+var _redux = __webpack_require__(4);
 
-exports.default = function () {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    var action = arguments[1];
+var _users = __webpack_require__(17);
 
-    console.log('$$$ reducer', action.type);
-    switch (action.type) {
-        case _actions.FETCH_USERS_SUCCESS:
-            console.log('$$ FETCH_USERS_SUCCESS reducer');
-            return action.payload.data;
-        case _actions.FETCH_USERS_FAILURE:
-            console.log('$$ FETCH_USERS_FAILURE reducer');
-            return action.payload;
-        default:
-            return state;
-    }
-};
+var _users2 = _interopRequireDefault(_users);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = (0, _redux.combineReducers)({
+    users: _users2.default
+});
 
 /***/ }),
 /* 17 */
@@ -491,91 +467,20 @@ exports.default = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = userSaga;
 
-var _axios = __webpack_require__(18);
+var _actions = __webpack_require__(3);
 
-var _axios2 = _interopRequireDefault(_axios);
+exports.default = function () {
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var action = arguments[1];
 
-var _effects = __webpack_require__(19);
-
-var _index = __webpack_require__(1);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var _marked = /*#__PURE__*/regeneratorRuntime.mark(fetchUsers),
-    _marked2 = /*#__PURE__*/regeneratorRuntime.mark(userSaga);
-
-var getUsersAPI = function getUsersAPI() {
-    return _axios2.default.get('http://react-ssr-api.herokuapp.com/users');
+    switch (action.type) {
+        case _actions.FETCH_USERS:
+            return action.payload.data;
+        default:
+            return state;
+    }
 };
-
-function fetchUsers() {
-    var res;
-    return regeneratorRuntime.wrap(function fetchUsers$(_context) {
-        while (1) {
-            switch (_context.prev = _context.next) {
-                case 0:
-                    _context.next = 2;
-                    return (0, _effects.call)(getUsersAPI);
-
-                case 2:
-                    res = _context.sent;
-
-                    console.log('$$$ res', res);
-
-                    if (!(res.status === 200)) {
-                        _context.next = 10;
-                        break;
-                    }
-
-                    console.log('$$$ 200');
-                    _context.next = 8;
-                    return (0, _effects.put)((0, _index.fetchUsersSuccess)(res));
-
-                case 8:
-                    _context.next = 12;
-                    break;
-
-                case 10:
-                    _context.next = 12;
-                    return (0, _effects.put)(fetchUsersFailure(res));
-
-                case 12:
-                case 'end':
-                    return _context.stop();
-            }
-        }
-    }, _marked, this);
-}
-
-function userSaga() {
-    return regeneratorRuntime.wrap(function userSaga$(_context2) {
-        while (1) {
-            switch (_context2.prev = _context2.next) {
-                case 0:
-                    _context2.next = 2;
-                    return (0, _effects.takeLatest)(_index.FETCH_USERS, fetchUsers);
-
-                case 2:
-                case 'end':
-                    return _context2.stop();
-            }
-        }
-    }, _marked2, this);
-}
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports) {
-
-module.exports = require("axios");
-
-/***/ }),
-/* 19 */
-/***/ (function(module, exports) {
-
-module.exports = require("redux-saga/effects");
 
 /***/ })
 /******/ ]);
