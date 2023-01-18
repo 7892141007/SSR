@@ -9,7 +9,7 @@ class UserList extends React.Component {
 
     renderUsers() {
         return this.props.users.map(user => {
-            return <li>{user.name}</li>
+            return <li key={user.id}>{user.name}</li>
         });
     }
 
@@ -29,4 +29,10 @@ function mapStateToProps(state) {
     return { users: state.users || [] };
 };
 
+function laodServerData(store) {
+    console.log('laodData for Server and then do hydration');
+    return store.dispatch(fetchUsers());
+}
+
+export { laodServerData };
 export default connect(mapStateToProps, { fetchUsers })(UserList);

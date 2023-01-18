@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from '../Routes';
+import { renderRoutes } from "react-router-config";
 import reducers from './reducers/index';
-import userSaga from './sagas/index';
 
 console.log('Client side APP loaded!');
 
@@ -17,7 +17,8 @@ window.store = clientStore;
 ReactDOm.hydrate(
     <Provider store={clientStore}>
       <BrowserRouter>
-        <Routes />
+      {/* <Routes /> */}
+        <div>{renderRoutes(Routes)}</div>
        </BrowserRouter>
     </Provider>,
 document.querySelector('#root'));
