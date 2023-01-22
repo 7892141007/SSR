@@ -1,7 +1,7 @@
 import React from 'react';
-import Home from './client/comps/Home';
-// import { Route } from 'react-router-dom';
-import UserList, { laodServerData } from './client/comps/UserList';
+import Home from './client/pages/Home';
+import MainComp from './client/MainComp';
+import UserList, {laodServerData} from './client/pages/UserList';
 
 // export default () => {
 //     return (
@@ -14,13 +14,19 @@ import UserList, { laodServerData } from './client/comps/UserList';
 
 export default [
     {
-        path: '/',
-        component: Home,
-        exact: true
-    },
-    {
-        path: '/users',
-        component: UserList,
-        laodServerData
+        ...MainComp,
+        routes: [
+            {
+                ...Home,
+                path: '/',
+                exact: true
+            },
+            {
+                component: UserList,
+                path: '/users',
+                laodServerData
+            }
+        ]
     }
 ]
+
